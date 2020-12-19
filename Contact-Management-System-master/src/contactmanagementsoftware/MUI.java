@@ -596,81 +596,29 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton1ActionPerformed");
+//        Add button
         notifyAllObservers("Add");
-
-//        int index = jList1.getSelectedIndex();
-//        if (index < 0) {
-//            JOptionPane.showMessageDialog(mg, "Select a category!");
-//            return;
-//        }
-//        jPanel1.setVisible(false);
-//        jPanel3.setVisible(true);
-//        x = index;
-//        flag = true;
-//        dflag = false;
-//        setDescription();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton2ActionPerformed");
+//        Delete button
         notifyAllObservers("Delete");
-
-//        int index = jList1.getSelectedIndex();
-//        if (index < 0) {
-//            JOptionPane.showMessageDialog(mg, "Select a category!");
-//            return;
-//        }
-//        int tindex = jXTable1.getSelectedRow();
-//        if (tindex < 0) {
-//            JOptionPane.showMessageDialog(mg, "Select an entry!");
-//            return;
-//        }
-//        int n = JOptionPane.showConfirmDialog(
-//                mg,
-//                "Are you sure you want to delete this?",
-//                "Confirm",
-//                JOptionPane.YES_NO_OPTION);
-//        if (n == 0) {
-//            a.get(index).remove(tindex);
-//            JOptionPane.showMessageDialog(mg, "Successfully Deleted");
-//            mg.setUpTableData();
-//        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton3ActionPerformed");
+//        Search button
         notifyAllObservers("Search");
-
-//        String s = (String) JOptionPane.showInputDialog(
-//                mg,
-//                "Enter name: ",
-//                "Input",
-//                JOptionPane.PLAIN_MESSAGE,
-//                null,
-//                null,
-//                "");
-//        if (s == null) {
-//            return;
-//        }
-//        jPanel1.setVisible(false);
-//        jPanel2.setVisible(true);
-//        str = s;
-//        details.setContentType("text/html");
-//        runn();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton4ActionPerformed");
+//        Exit button
         notifyAllObservers("Exit");
-
-//        System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -684,51 +632,16 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton5ActionPerformed");
+//        Edit Button
         notifyAllObservers("Edit");
-
-//        int index = jList1.getSelectedIndex();
-//        if (index < 0) {
-//            JOptionPane.showMessageDialog(mg, "Select a category!");
-//            return;
-//        }
-//        int tindex = jXTable1.getSelectedRow();
-//        if (tindex < 0) {
-//            JOptionPane.showMessageDialog(mg, "Select an entry!");
-//            return;
-//        }
-//        num = tindex;
-//        flag = false;
-//        dflag = false;
-//        x = index;
-//        setDescription();
-//        jPanel1.setVisible(false);
-//        jPanel3.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+//        View full detail button
         System.out.println(button.getText());
         System.out.println("jButton6ActionPerformed");
         notifyAllObservers("View");
-
-//        int index = jList1.getSelectedIndex();
-//        if (index < 0) {
-//            JOptionPane.showMessageDialog(mg, "Select a category!");
-//            return;
-//        }
-//        int tindex = jXTable1.getSelectedRow();
-//        if (tindex < 0) {
-//            JOptionPane.showMessageDialog(mg, "Select an entry!");
-//            return;
-//        }
-//        num = tindex;
-//        flag = false;
-//        x = index;
-//        jPanel1.setVisible(false);
-//        jPanel3.setVisible(true);
-//        dflag = true;
-//        setDescription();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     public void runn() {
@@ -804,82 +717,21 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+//        Read from file button
         System.out.println(button.getText());
-        System.out.println("jButton7ActionPerformed");
         notifyAllObservers("Read");
-
-//        JFileChooser fileChooser = new JFileChooser();
-//        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-//        int result = fileChooser.showOpenDialog(this);
-//        if (result == JFileChooser.APPROVE_OPTION) {
-//            File selectedFile = fileChooser.getSelectedFile();
-//            try {
-//                temp = (ArrayList<ArrayList<Acquaintances>>) SerializationUtil.deserialize(selectedFile);
-//            } catch (ClassNotFoundException | IOException e) {
-//                JOptionPane.showMessageDialog(mg, "Error");
-//                return;
-//            }
-//        } else {
-//            return;
-//        }
-//        try {
-//            for (int i = 0; i < 4; i++) {
-//                for (int j = 0; j < temp.get(i).size(); j++) {
-//                    a.get(i).add(temp.get(i).get(j));
-//                }
-//            }
-//        } catch (Exception e) {
-//
-//        }
-//        mg.setUpTableData();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+//        Save as file button
         System.out.println(button.getText());
-        System.out.println("jButton8ActionPerformed");
         notifyAllObservers("Save");
-
-//        String s = (String) JOptionPane.showInputDialog(
-//                mg,
-//                "Enter file name: (*.ser)",
-//                "Input",
-//                JOptionPane.PLAIN_MESSAGE,
-//                null,
-//                null,
-//                "output.ser");
-//        if (s == null) {
-//            return;
-//        }
-//        if (!s.endsWith(".ser")) {
-//            JOptionPane.showMessageDialog(mg, "File name should end with .ser");
-//            return;
-//        }
-//        File[] fileList = (new File(".")).listFiles((File pathname) -> pathname.getName().endsWith(".ser"));
-//        boolean flag = false;
-//        for (File f : fileList) {
-//            if (f.getName().matches(s)) {
-//                flag = true;
-//            }
-//        }
-//        if (flag) {
-//            int q = JOptionPane.showConfirmDialog(mg, s + " already exists:\nAre you sure you want to overwrite?");
-//            if (q != 0) {
-//                return;
-//            }
-//        }
-//        try {
-//            SerializationUtil.serialize(a, s);
-//        } catch (IOException e) {
-//            return;
-//        }
-//        JOptionPane.showMessageDialog(mg, s + " saved successfully");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton9ActionPerformed");
 
         jPanel2.setVisible(false);
         jPanel1.setVisible(true);
@@ -1176,6 +1028,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
         switch (action) {
             case "Add":
 //                jButton1ActionPerformed
+//                Action when add button is clicked
                 index = jList1.getSelectedIndex();
                 if (index < 0) {
                     JOptionPane.showMessageDialog(mg, "Select a category!");
@@ -1190,6 +1043,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
             case "Delete":
 //                jButton2ActionPerformed
+//                Action when delete button is clicked
                 index = jList1.getSelectedIndex();
                 if (index < 0) {
                     JOptionPane.showMessageDialog(mg, "Select a category!");
@@ -1213,6 +1067,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
             case "Edit":
 //                jButton5ActionPerformed
+//                Action when edit button is clicked
                 index = jList1.getSelectedIndex();
                 if (index < 0) {
                     JOptionPane.showMessageDialog(mg, "Select a category!");
@@ -1233,6 +1088,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
             case "Search":
 //                jButton3ActionPerformed
+//                Action when search button is clicked
                 String s = (String) JOptionPane.showInputDialog(
                         mg,
                         "Enter name: ",
@@ -1252,6 +1108,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
             case "View":
 //                jButton6ActionPerformed
+//                Action when View full detail button is clicked 
                 index = jList1.getSelectedIndex();
                 if (index < 0) {
                     JOptionPane.showMessageDialog(mg, "Select a category!");
@@ -1272,6 +1129,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
             case "Read":
 //                jButton7ActionPerformed
+//                Action when Read from file button is clicked
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
                 int result = fileChooser.showOpenDialog(this);
@@ -1299,6 +1157,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
             case "Save":
 //                jButton8ActionPerformed
+//                Action done when Save as file button is clicked
                 s = (String) JOptionPane.showInputDialog(
                         mg,
                         "Enter file name: (*.ser)",
@@ -1336,6 +1195,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
             case "Exit":
 //                jButton4ActionPerformed
+//                Action done when Exit button is clicked
                 System.exit(0);
                 break;
         }
