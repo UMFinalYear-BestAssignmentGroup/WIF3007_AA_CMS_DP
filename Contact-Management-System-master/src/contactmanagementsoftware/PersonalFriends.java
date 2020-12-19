@@ -1,83 +1,63 @@
 package contactmanagementsoftware;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PersonalFriends extends Acquaintances implements Serializable{
     private String AContext;
     private String ADate;
     private String Events;
-    private static Scanner reader = new Scanner(System.in);
     public static int numberPerF = 0;
     
     PersonalFriends(){
         numberPerF++;
     }
+
+    @Override
+    public void setFirstInfo(String aContext) {
+        Scanner reader = new Scanner(System.in);
+        if(!aContext.isEmpty())
+            this.AContext = aContext;
+        else{
+            System.out.println("Enter at least one character");
+            setFirstInfo(reader.nextLine());
+        }
+    }
     
     @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public void setName(String Name) {
-        super.setName(Name); 
-    }
-
-    @Override
-    public String getMobileNo() {
-        return super.getMobileNo();
-    }
-
-    @Override
-    public void setMobileNo(String MobileNo) {
-        super.setMobileNo(MobileNo);
-    }
-
-    @Override
-    public String getEmail() {
-        return super.getEmail();
-    }
-
-    @Override
-    public void setEmail(String Email) {
-        super.setEmail(Email);
-    }
-    
-    public String getAContext() {
+    public String getFirstInfo() {
         return AContext;
     }
 
-    public void setAContext(String AContext) {
-        Scanner reader = new Scanner(System.in);
-        if(!AContext.isEmpty())
-            this.AContext = AContext;
-        else{
-            System.out.println("Enter at least one character");
-            setAContext(reader.nextLine());
-        }
+
+    @Override
+    public void setSecondInfo(String aDate) {
+        this.ADate = aDate;
     }
 
-    public String getADate() {
+    @Override
+    public String getSecondInfo() {
         return ADate;
     }
 
-    public void setADate(String ADate) {
-        this.ADate = ADate;
+    @Override
+    public void setThirdInfo(String events) {
+        Scanner reader = new Scanner(System.in);
+        if(!events.isEmpty())
+            this.Events = events;
+        else{
+            System.out.println("Enter at least one character");
+            setThirdInfo(reader.nextLine());
+        }
     }
-
-    public String getEvents() {
+    
+    @Override
+    public String getThirdInfo() {
         return Events;
     }
 
-    public void setEvents(String Events) {
-        Scanner reader = new Scanner(System.in);
-        if(!Events.isEmpty())
-            this.Events = Events;
-        else{
-            System.out.println("Enter at least one character");
-            setEvents(reader.nextLine());
-        }
+    @Override
+    public int checkInformation() {
+        return 3;
     }
 }

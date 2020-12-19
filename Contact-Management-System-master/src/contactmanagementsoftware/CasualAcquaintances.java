@@ -12,76 +12,57 @@ public class CasualAcquaintances extends Acquaintances implements Serializable{
     CasualAcquaintances(){
         numberCA++;
     }
+
+    @Override
+    public void setFirstInfo(String whenWhere) {
+        Scanner reader = new Scanner(System.in);
+        if(!whenWhere.isEmpty())
+            this.WhenWhere = whenWhere;
+        else{
+            System.out.println("Enter atleast one character");
+            setFirstInfo(reader.nextLine());
+        }
+    }
     
     @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public void setName(String Name) {
-        super.setName(Name); 
-    }
-
-    @Override
-    public String getMobileNo() {
-        return super.getMobileNo();
-    }
-
-    @Override
-    public void setMobileNo(String MobileNo) {
-        super.setMobileNo(MobileNo);
-    }
-
-    @Override
-    public String getEmail() {
-        return super.getEmail();
-    }
-
-    @Override
-    public void setEmail(String Email) {
-        super.setEmail(Email);
-    }
-    
-    public String getWhenWhere() {
+    public String getFirstInfo() {
         return WhenWhere;
     }
 
-    public void setWhenWhere(String WhenWhere) {
+    @Override
+    public void setSecondInfo(String circumstances) {
         Scanner reader = new Scanner(System.in);
-        if(!WhenWhere.isEmpty())
-            this.WhenWhere = WhenWhere;
+        if(!circumstances.isEmpty())
+            this.Circumstances = circumstances;
         else{
             System.out.println("Enter atleast one character");
-            setWhenWhere(reader.nextLine());
+            setSecondInfo(reader.nextLine());
         }
     }
-
-    public String getCircumstances() {
+    
+    @Override
+    public String getSecondInfo() {
         return Circumstances;
     }
 
-    public void setCircumstances(String Circumstances) {
+    @Override
+    public void setThirdInfo(String otherInfo) {
         Scanner reader = new Scanner(System.in);
-        if(!Circumstances.isEmpty())
-            this.Circumstances = Circumstances;
+        if(!otherInfo.isEmpty())
+            this.OtherInfo = otherInfo;
         else{
             System.out.println("Enter atleast one character");
-            setCircumstances(reader.nextLine());
+             setThirdInfo(reader.nextLine());
         }
     }
-
-    public String getOtherInfo() {
+    
+    @Override
+    public String getThirdInfo() {
         return OtherInfo;
     }
 
-    public void setOtherInfo(String OtherInfo) {
-        Scanner reader = new Scanner(System.in);
-        if(!OtherInfo.isEmpty())
-            this.OtherInfo = OtherInfo;
-        else{
-            System.out.println("Enter atleast one character");
-            setOtherInfo(reader.nextLine());
-        }
+    @Override
+    public int checkInformation() {
+        return 3;
     }
 }

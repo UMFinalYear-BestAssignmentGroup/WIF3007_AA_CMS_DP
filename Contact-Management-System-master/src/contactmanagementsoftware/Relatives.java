@@ -1,62 +1,39 @@
 package contactmanagementsoftware;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Relatives extends Acquaintances implements Serializable{
     private String BDate;
     private String LDate;
     public static int numberRel = 0;
-    private static Scanner reader = new Scanner(System.in);
     
     Relatives(){
         numberRel++;
     }
+
+    @Override
+    public void setFirstInfo(String bDate) {
+        this.BDate = bDate;
+    }
     
     @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public void setName(String Name) {
-        super.setName(Name); 
-    }
-
-    @Override
-    public String getMobileNo() {
-        return super.getMobileNo();
-    }
-
-    @Override
-    public void setMobileNo(String MobileNo) {
-        super.setMobileNo(MobileNo);
-    }
-
-    @Override
-    public String getEmail() {
-        return super.getEmail();
-    }
-
-    @Override
-    public void setEmail(String Email) {
-        super.setEmail(Email);
-    }
-    
-    public String getBDate() {
+    public String getFirstInfo() {
         return BDate;
     }
 
-    public void setBDate(String BDate) {
-        this.BDate = BDate;
+    @Override
+    public void setSecondInfo(String lDate) {
+        this.LDate = lDate;
     }
-
-    public String getLDate() {
+    
+    @Override
+    public String getSecondInfo() {
         return LDate;
     }
 
-    public void setLDate(String LDate) {
-        this.LDate = LDate;
+    @Override
+    public int checkInformation() {
+        return 2;
     }
 }
