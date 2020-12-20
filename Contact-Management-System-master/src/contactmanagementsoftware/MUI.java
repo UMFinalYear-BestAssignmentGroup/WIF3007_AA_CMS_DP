@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ritz619
  */
-public class MUI extends javax.swing.JFrame {
+public class MUI extends javax.swing.JFrame implements ObserverSubject {
 
     /**
      * Creates new form MUI
@@ -33,6 +33,7 @@ public class MUI extends javax.swing.JFrame {
     private boolean dflag;
     private String op;
     private String str;
+    private ArrayList<Observer> observers = new ArrayList<>();
 
     public void setMg(MUI mg) {
         this.mg = mg;
@@ -169,6 +170,9 @@ public class MUI extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(null, columnNames);
         jXTable1.setModel(model);
         setUpTableData();
+
+        //Adding Observer to the ObserverList
+        addObserver(new ButtonListener(this));
     }
 
     public final void setUpTableData() {
@@ -586,63 +590,31 @@ public class MUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int index = jList1.getSelectedIndex();
-        if (index < 0) {
-            JOptionPane.showMessageDialog(mg, "Select a category!");
-            return;
-        }
-        jPanel1.setVisible(false);
-        jPanel3.setVisible(true);
-        x = index;
-        flag = true;
-        dflag = false;
-        setDescription();
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+        System.out.println(button.getText());
+//        Add button
+        notifyAllObservers("Add");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int index = jList1.getSelectedIndex();
-        if (index < 0) {
-            JOptionPane.showMessageDialog(mg, "Select a category!");
-            return;
-        }
-        int tindex = jXTable1.getSelectedRow();
-        if (tindex < 0) {
-            JOptionPane.showMessageDialog(mg, "Select an entry!");
-            return;
-        }
-        int n = JOptionPane.showConfirmDialog(
-                mg,
-                "Are you sure you want to delete this?",
-                "Confirm",
-                JOptionPane.YES_NO_OPTION);
-        if (n == 0) {
-            a.get(index).remove(tindex);
-            JOptionPane.showMessageDialog(mg, "Successfully Deleted");
-            mg.setUpTableData();
-        }
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+        System.out.println(button.getText());
+//        Delete button
+        notifyAllObservers("Delete");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String s = (String) JOptionPane.showInputDialog(
-                mg,
-                "Enter name: ",
-                "Input",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                null,
-                "");
-        if (s == null) {
-            return;
-        }
-        jPanel1.setVisible(false);
-        jPanel2.setVisible(true);
-        str = s;
-        details.setContentType("text/html");
-        runn();
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+//        View full detail button
+        System.out.println(button.getText());
+        notifyAllObservers("Search");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        System.exit(0);        // TODO add your handling code here:
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+        System.out.println(button.getText());
+//        Exit button
+        notifyAllObservers("Exit");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -650,43 +622,17 @@ public class MUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jList1ValueChanged
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int index = jList1.getSelectedIndex();
-        if (index < 0) {
-            JOptionPane.showMessageDialog(mg, "Select a category!");
-            return;
-        }
-        int tindex = jXTable1.getSelectedRow();
-        if (tindex < 0) {
-            JOptionPane.showMessageDialog(mg, "Select an entry!");
-            return;
-        }
-        num = tindex;
-        flag = false;
-        dflag = false;
-        x = index;
-        setDescription();
-        jPanel1.setVisible(false);
-        jPanel3.setVisible(true);
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+        System.out.println(button.getText());
+//        Edit Button
+        notifyAllObservers("Edit");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        int index = jList1.getSelectedIndex();
-        if (index < 0) {
-            JOptionPane.showMessageDialog(mg, "Select a category!");
-            return;
-        }
-        int tindex = jXTable1.getSelectedRow();
-        if (tindex < 0) {
-            JOptionPane.showMessageDialog(mg, "Select an entry!");
-            return;
-        }
-        num = tindex;
-        flag = false;
-        x = index;
-        jPanel1.setVisible(false);
-        jPanel3.setVisible(true);
-        dflag = true;
-        setDescription();
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+//        View full detail button
+        System.out.println(button.getText());
+        notifyAllObservers("View");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     public void runn() {
@@ -761,72 +707,24 @@ public class MUI extends javax.swing.JFrame {
     }
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            try {
-                temp = (ArrayList<ArrayList<Acquaintances>>) SerializationUtil.deserialize(selectedFile);
-            } catch (ClassNotFoundException | IOException e) {
-                JOptionPane.showMessageDialog(mg, "Error");
-                return;
-            }
-        } else {
-            return;
-        }
-        try {
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < temp.get(i).size(); j++) {
-                    a.get(i).add(temp.get(i).get(j));
-                }
-            }
-        } catch (Exception e) {
-
-        }
-        mg.setUpTableData();
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+//        Read from file button
+        System.out.println(button.getText());
+        notifyAllObservers("Read");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        String s = (String) JOptionPane.showInputDialog(
-                mg,
-                "Enter file name: (*.ser)",
-                "Input",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                null,
-                "output.ser");
-        if (s == null) {
-            return;
-        }
-        if (!s.endsWith(".ser")) {
-            JOptionPane.showMessageDialog(mg, "File name should end with .ser");
-            return;
-        }
-        File[] fileList = (new File(".")).listFiles((File pathname) -> pathname.getName().endsWith(".ser"));
-        boolean flag = false;
-        for (File f : fileList) {
-            if (f.getName().matches(s)) {
-                flag = true;
-            }
-        }
-        if (flag) {
-            int q = JOptionPane.showConfirmDialog(mg, s + " already exists:\nAre you sure you want to overwrite?");
-            if (q != 0) {
-                return;
-            }
-        }
-        try {
-            SerializationUtil.serialize(a, s);
-        } catch (IOException e) {
-            return;
-        }
-        JOptionPane.showMessageDialog(mg, s + " saved successfully");
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+//        Save as file button
+        System.out.println(button.getText());
+        notifyAllObservers("Save");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        jPanel2.setVisible(false);
-        jPanel1.setVisible(true);
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+        System.out.println(button.getText());
+        System.out.println("jButton9ActionPerformed");
+        notifyAllObservers("jButton9");
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
@@ -861,138 +759,17 @@ public class MUI extends javax.swing.JFrame {
     }
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        dflag = true;
-        String Name = name.getText();
-        if (Name.isEmpty()) {
-            JOptionPane.showMessageDialog(mg, "Enter a name");
-            return;
-        }
-        String Mobile = mobile.getText();
-        if (!MobileNoChecker(Mobile)) {
-            JOptionPane.showMessageDialog(mg, "Enter a valid mobile number (6-15 digits)");
-            return;
-        }
-        String Email = email.getText();
-        if (!Email.contains("@")) {
-            JOptionPane.showMessageDialog(mg, "Enter a valid email");
-            return;
-        }
-        String One, Two, Three;
-        switch (x) {
-            case 0: //perF
-                One = one.getText();
-                if (One.isEmpty() || One.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                Two = two.getText();
-                if (Two.isEmpty() || Two.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                Three = three.getText();
-                if (!validDate(Three)) {
-                    return;
-                }
-                if (Three.isEmpty() || Three.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                PersonalFriends perF;
-                if (flag) {
-                    perF = new PersonalFriends();
-                } else {
-                    perF = (PersonalFriends) a.get(x).get(num);
-                }
-                perF.setDetails(Name, Mobile, Email, Two, Three, One);
-                if (flag) {
-                    a.get(x).add(perF);
-                }
-                //this.a.get(x).add(perF);
-                break;
-            case 1: //rel
-                One = one.getText();
-                if (One.isEmpty() || One.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                if (!validDate(One)) {
-                    return;
-                }
-                Two = two.getText();
-                if (Two.isEmpty() || Two.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                if (!validDate(Two)) {
-                    return;
-                }
-                Relatives rel;
-                if (flag) {
-                    rel = new Relatives();
-                } else {
-                    rel = (Relatives) a.get(x).get(num);
-                }
-                rel.setDetails(Name, Mobile, Email, One, Two, null);
-                if (flag) {
-                    a.get(x).add(rel);
-                }
-                break;
-            case 2: //proF
-                One = one.getText();
-                if (One.isEmpty() || One.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                ProfessionalFriends proF;
-                if (flag) {
-                    proF = new ProfessionalFriends();
-                } else {
-                    proF = (ProfessionalFriends) a.get(x).get(num);
-                }
-                proF.setDetails(Name, Mobile, Email, One, null, null);
-                if (flag) {
-                    a.get(x).add(proF);
-                }
-                break;
-            case 3: //ca
-                One = one.getText();
-                if (One.isEmpty() || One.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                Two = two.getText();
-                if (Two.isEmpty() || Two.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                Three = three.getText();
-                if (Three.isEmpty() || Three.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
-                CasualAcquaintances ca;
-                if (flag) {
-                    ca = new CasualAcquaintances();
-                } else {
-                    ca = (CasualAcquaintances) a.get(x).get(num);
-                }
-                ca.setDetails(Name, Mobile, Email, One, Two, Three);
-                if (flag) {
-                    a.get(x).add(ca);
-                }
-                break;
-            default:
-                break;
-        }
-        jPanel1.setVisible(true);
-        jPanel3.setVisible(false);
-        mg.setUpTableData();
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+        System.out.println(button.getText());
+        System.out.println("jButton10ActionPerformed");
+        notifyAllObservers("jButton10");
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        jPanel1.setVisible(true);
-        jPanel3.setVisible(false);
+        javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
+        System.out.println(button.getText());
+        System.out.println("jButton11ActionPerformed");
+        notifyAllObservers("jButton11");
     }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
@@ -1070,4 +847,345 @@ public class MUI extends javax.swing.JFrame {
     private javax.swing.JTextArea three;
     private javax.swing.JTextArea two;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        this.observers.remove(observer);
+    }
+
+    @Override
+    public void notifyAllObservers(String action) {
+        for (Observer observer : observers) {
+            observer.update(action);
+        }
+    }
+
+//    perform(String action) runs all the action based on the buttons clicked (Observer design pattern)
+    @Override
+    public void perform(String action) {
+        int index;
+        int tindex;
+        String s;
+        switch (action) {
+            case "Add":
+//                jButton1ActionPerformed
+//                Action when add button is clicked
+                index = jList1.getSelectedIndex();
+                if (index < 0) {
+                    JOptionPane.showMessageDialog(mg, "Select a category!");
+                    return;
+                }
+                jPanel1.setVisible(false);
+                jPanel3.setVisible(true);
+                x = index;
+                flag = true;
+                dflag = false;
+                setDescription();
+                break;
+            case "Delete":
+//                jButton2ActionPerformed
+//                Action when delete button is clicked
+                index = jList1.getSelectedIndex();
+                if (index < 0) {
+                    JOptionPane.showMessageDialog(mg, "Select a category!");
+                    return;
+                }
+                tindex = jXTable1.getSelectedRow();
+                if (tindex < 0) {
+                    JOptionPane.showMessageDialog(mg, "Select an entry!");
+                    return;
+                }
+                int n = JOptionPane.showConfirmDialog(
+                        mg,
+                        "Are you sure you want to delete this?",
+                        "Confirm",
+                        JOptionPane.YES_NO_OPTION);
+                if (n == 0) {
+                    a.get(index).remove(tindex);
+                    JOptionPane.showMessageDialog(mg, "Successfully Deleted");
+                    mg.setUpTableData();
+                }
+                break;
+            case "Edit":
+//                jButton5ActionPerformed
+//                Action when edit button is clicked
+                index = jList1.getSelectedIndex();
+                if (index < 0) {
+                    JOptionPane.showMessageDialog(mg, "Select a category!");
+                    return;
+                }
+                tindex = jXTable1.getSelectedRow();
+                if (tindex < 0) {
+                    JOptionPane.showMessageDialog(mg, "Select an entry!");
+                    return;
+                }
+                num = tindex;
+                flag = false;
+                dflag = false;
+                x = index;
+                setDescription();
+                jPanel1.setVisible(false);
+                jPanel3.setVisible(true);
+                break;
+            case "Search":
+//                jButton3ActionPerformed
+//                Action when search button is clicked
+                s = (String) JOptionPane.showInputDialog(
+                        mg,
+                        "Enter name: ",
+                        "Input",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "");
+                if (s == null) {
+                    return;
+                }
+                jPanel1.setVisible(false);
+                jPanel2.setVisible(true);
+                str = s;
+                details.setContentType("text/html");
+                runn();
+                break;
+            case "View":
+//                jButton6ActionPerformed
+//                Action when View full detail button is clicked 
+                index = jList1.getSelectedIndex();
+                if (index < 0) {
+                    JOptionPane.showMessageDialog(mg, "Select a category!");
+                    return;
+                }
+                tindex = jXTable1.getSelectedRow();
+                if (tindex < 0) {
+                    JOptionPane.showMessageDialog(mg, "Select an entry!");
+                    return;
+                }
+                num = tindex;
+                flag = false;
+                x = index;
+                jPanel1.setVisible(false);
+                jPanel3.setVisible(true);
+                dflag = true;
+                setDescription();
+                break;
+            case "Read":
+//                jButton7ActionPerformed
+//                Action when Read from file button is clicked
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+                int result = fileChooser.showOpenDialog(this);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    try {
+                        temp = (ArrayList<ArrayList<Acquaintances>>) SerializationUtil.deserialize(selectedFile);
+                    } catch (ClassNotFoundException | IOException e) {
+                        JOptionPane.showMessageDialog(mg, "Error");
+                        return;
+                    }
+                } else {
+                    return;
+                }
+                try {
+                    for (int i = 0; i < 4; i++) {
+                        for (int j = 0; j < temp.get(i).size(); j++) {
+                            a.get(i).add(temp.get(i).get(j));
+                        }
+                    }
+                } catch (Exception e) {
+
+                }
+                mg.setUpTableData();
+                break;
+            case "Save":
+//                jButton8ActionPerformed
+//                Action done when Save as file button is clicked
+                s = (String) JOptionPane.showInputDialog(
+                        mg,
+                        "Enter file name: (*.ser)",
+                        "Input",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        null,
+                        "output.ser");
+                if (s == null) {
+                    return;
+                }
+                if (!s.endsWith(".ser")) {
+                    JOptionPane.showMessageDialog(mg, "File name should end with .ser");
+                    return;
+                }
+                File[] fileList = (new File(".")).listFiles((File pathname) -> pathname.getName().endsWith(".ser"));
+                boolean flag = false;
+                for (File f : fileList) {
+                    if (f.getName().matches(s)) {
+                        flag = true;
+                    }
+                }
+                if (flag) {
+                    int q = JOptionPane.showConfirmDialog(mg, s + " already exists:\nAre you sure you want to overwrite?");
+                    if (q != 0) {
+                        return;
+                    }
+                }
+                try {
+                    SerializationUtil.serialize(a, s);
+                } catch (IOException e) {
+                    return;
+                }
+                JOptionPane.showMessageDialog(mg, s + " saved successfully");
+                break;
+            case "Exit":
+//                jButton4ActionPerformed
+//                Action done when Exit button is clicked
+                System.exit(0);
+                break;
+            case "jButton9":
+//                jButton9ActionPerformed
+                jPanel2.setVisible(false);
+                jPanel1.setVisible(true);
+                break;
+            case "jButton10":
+//                jButton10ActionPerformed
+                dflag = true;
+                String Name = name.getText();
+                if (Name.isEmpty()) {
+                    JOptionPane.showMessageDialog(mg, "Enter a name");
+                    return;
+                }
+                String Mobile = mobile.getText();
+                if (!MobileNoChecker(Mobile)) {
+                    JOptionPane.showMessageDialog(mg, "Enter a valid mobile number (6-15 digits)");
+                    return;
+                }
+                String Email = email.getText();
+                if (!Email.contains("@")) {
+                    JOptionPane.showMessageDialog(mg, "Enter a valid email");
+                    return;
+                }
+                String One,
+                 Two,
+                 Three;
+                switch (x) {
+                    case 0: //perF
+                        One = one.getText();
+                        if (One.isEmpty() || One.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        Two = two.getText();
+                        if (Two.isEmpty() || Two.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        Three = three.getText();
+                        if (!validDate(Three)) {
+                            return;
+                        }
+                        if (Three.isEmpty() || Three.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        PersonalFriends perF;
+                        if (this.flag) {
+                            perF = new PersonalFriends();
+                        } else {
+                            perF = (PersonalFriends) a.get(x).get(num);
+                        }
+                        perF.setDetails(Name, Mobile, Email, Two, Three, One);
+                        if (this.flag) {
+                            a.get(x).add(perF);
+                        }
+                        //this.a.get(x).add(perF);
+                        break;
+                    case 1: //rel
+                        One = one.getText();
+                        if (One.isEmpty() || One.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        if (!validDate(One)) {
+                            return;
+                        }
+                        Two = two.getText();
+                        if (Two.isEmpty() || Two.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        if (!validDate(Two)) {
+                            return;
+                        }
+                        Relatives rel;
+                        if (this.flag) {
+                            rel = new Relatives();
+                        } else {
+                            rel = (Relatives) a.get(x).get(num);
+                        }
+                        rel.setDetails(Name, Mobile, Email, One, Two, null);
+                        if (this.flag) {
+                            a.get(x).add(rel);
+                        }
+                        break;
+                    case 2: //proF
+                        One = one.getText();
+                        if (One.isEmpty() || One.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        ProfessionalFriends proF;
+                        if (this.flag) {
+                            proF = new ProfessionalFriends();
+                        } else {
+                            proF = (ProfessionalFriends) a.get(x).get(num);
+                        }
+                        proF.setDetails(Name, Mobile, Email, One, null, null);
+                        if (this.flag) {
+                            a.get(x).add(proF);
+                        }
+                        break;
+                    case 3: //ca
+                        One = one.getText();
+                        if (One.isEmpty() || One.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        Two = two.getText();
+                        if (Two.isEmpty() || Two.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        Three = three.getText();
+                        if (Three.isEmpty() || Three.length() > 300) {
+                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                            return;
+                        }
+                        CasualAcquaintances ca;
+                        if (this.flag) {
+                            ca = new CasualAcquaintances();
+                        } else {
+                            ca = (CasualAcquaintances) a.get(x).get(num);
+                        }
+                        ca.setDetails(Name, Mobile, Email, One, Two, Three);
+                        if (this.flag) {
+                            a.get(x).add(ca);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                jPanel1.setVisible(true);
+                jPanel3.setVisible(false);
+                mg.setUpTableData();
+                break;
+            case "jButton11":
+//                jButton11ActionPerformed
+                jPanel1.setVisible(true);
+                jPanel3.setVisible(false);
+                break;
+        }
+    }
 }
