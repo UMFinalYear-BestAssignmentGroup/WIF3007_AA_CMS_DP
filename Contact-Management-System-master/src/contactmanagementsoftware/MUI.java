@@ -723,7 +723,6 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton9ActionPerformed");
         notifyAllObservers("jButton9");
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -761,14 +760,12 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton10ActionPerformed");
         notifyAllObservers("jButton10");
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        System.out.println("jButton11ActionPerformed");
         notifyAllObservers("jButton11");
     }//GEN-LAST:event_jButton11ActionPerformed
 
