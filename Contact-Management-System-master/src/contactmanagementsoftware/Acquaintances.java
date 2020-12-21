@@ -12,25 +12,29 @@ public abstract class Acquaintances implements Serializable {
     private String Info2;
     private String Info3;
     public static int number = 0;
-    private int checkInformation;
 
     Acquaintances() {
         number++;
     }
 
+    // Template Method to set the information for each category of acquaintances
     public void setDetails(String name, String mobileNo, String email, String info1, String info2, String info3) {
         setName(name);
         setMobileNo(mobileNo);
         setEmail(email);
+        // infoNum is the number of extra informations required by each category of acquaintances
         int infoNum = checkInformation();
 
         if (infoNum > 0) {
+            // For acquaintances that required only one extra information
             setFirstInfo(info1);
         }
         if (infoNum > 1) {
+            //For acquaintances that required two extra information
             setSecondInfo(info2);
         }
         if (infoNum > 2) {
+            //For acquaintances that required three extra information
             setThirdInfo(info3);
         }
     }
@@ -88,29 +92,43 @@ public abstract class Acquaintances implements Serializable {
         }
     }
 
+    // Hook method to set the first information for each category
+    // Will be overwrite in subclasses when needed
     public void setFirstInfo(String info) {
         this.Info1 = info;
     }
 
+    //Hook method to get the first information of each category
+    // Will be overwrite in subclasses when needed
     public String getFirstInfo() {
         return Info1;
     }
 
+    // Hook method to set the second information for each category
+    // Will be overwrite in subclasses when needed
     public void setSecondInfo(String info) {
         this.Info2 = info;
     }
 
+    // Hook method to get the second information of each category
+    // Will be overwrite in subclasses when needed
     public String getSecondInfo() {
         return Info2;
     }
 
+    // Hook method to set the third information for each category
+    // Will be overwrite in subclasses when needed
     public void setThirdInfo(String info) {
         this.Info3 = info;
     }
 
+    // Hook method to get the third information of each category
+    // Will be overwrite in subclasses when needed
     public String getThirdInfo() {
         return Info3;
     }
 
+    // Abstract method that return the number of extra informations required by each category
+    // Used in setDetails() template method to determine the number of extra information.
     public abstract int checkInformation();
 }

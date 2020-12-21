@@ -66,28 +66,34 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
         if (!flag) {
             jButton10.setText("Save");
             Acquaintances e = a.get(x).get(num);
+            // Set text for basic information
             name.setText(e.getName());
             mobile.setText(e.getMobileNo());
             email.setText(e.getEmail());
+            // Switch cases according to the category of the acquaintances
             switch (x) {
                 case 0:
-                    one.setText(e.getThirdInfo());
-                    two.setText(e.getFirstInfo());
-                    three.setText(e.getSecondInfo());
+                    // PersonalFriends extra information
+                    one.setText(e.getThirdInfo());  //Events
+                    two.setText(e.getFirstInfo());  //Acontext
+                    three.setText(e.getSecondInfo()); //ADate
                     break;
                 case 1:
-                    one.setText(e.getFirstInfo());
-                    two.setText(e.getSecondInfo());
+                    // Relatives extra information
+                    one.setText(e.getFirstInfo());  //BDate
+                    two.setText(e.getSecondInfo());  //LDate
                     break;
                 case 2:
-                    one.setText(e.getFirstInfo());
+                    // ProfessionalFriends extra information
+                    one.setText(e.getFirstInfo());  //CommonInterests
                     break;
                 case 3:
-                    one.setText(e.getFirstInfo());
+                    // CasualAcquaintannces extra informatin
+                    one.setText(e.getFirstInfo());  // WhenWhere
                     two.setVisible(true);
                     three.setVisible(true);
-                    two.setText(e.getSecondInfo());
-                    three.setText(e.getThirdInfo());
+                    two.setText(e.getSecondInfo());  //Circumstances
+                    three.setText(e.getThirdInfo());  //OtherInfo
                     break;
                 default:
                     break;
@@ -1093,6 +1099,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                         } else {
                             perF = (PersonalFriends) a.get(x).get(num);
                         }
+                        // Use template method in the Acquaintances.java to set the details of PersonalFriends
                         perF.setDetails(Name, Mobile, Email, Two, Three, One);
                         if (this.flag) {
                             a.get(x).add(perF);
@@ -1122,6 +1129,8 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                         } else {
                             rel = (Relatives) a.get(x).get(num);
                         }
+                        // Use template method in the Acquaintances.java to set the details of Relatives
+                        // null for irrelevant extra information
                         rel.setDetails(Name, Mobile, Email, One, Two, null);
                         if (this.flag) {
                             a.get(x).add(rel);
@@ -1139,6 +1148,8 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                         } else {
                             proF = (ProfessionalFriends) a.get(x).get(num);
                         }
+                        // Use template method in the Acquaintances.java to set the details of ProfessionalFriends
+                        // null for irrelevant extra information
                         proF.setDetails(Name, Mobile, Email, One, null, null);
                         if (this.flag) {
                             a.get(x).add(proF);
@@ -1166,6 +1177,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                         } else {
                             ca = (CasualAcquaintances) a.get(x).get(num);
                         }
+                        // Use template method in the Acquaintances.java to set the details of CasualAcquaintances
                         ca.setDetails(Name, Mobile, Email, One, Two, Three);
                         if (this.flag) {
                             a.get(x).add(ca);

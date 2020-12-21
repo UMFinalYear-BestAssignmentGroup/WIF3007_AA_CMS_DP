@@ -12,6 +12,7 @@ public class ProfessionalFriends extends Acquaintances implements Serializable{
         numberProF++;
     }
 
+    // Override the setFirstInfo hook method from Acquaintances.java to set the CommonInterests information
     @Override
     public void setFirstInfo(String CommonInterests) {
         Scanner reader = new Scanner(System.in);
@@ -23,11 +24,13 @@ public class ProfessionalFriends extends Acquaintances implements Serializable{
         }
     }
     
+    // Override the getFirstInfo hook method from Acquaintances.java to get the CommonInterests information
     @Override
     public String getFirstInfo() {
         return CommonInterests;
     }
 
+    // Override the abstract method, checkInformation() in the Acquaintances.java to return the number of extra information required which is 1
     @Override
     public int checkInformation() {
         return 1;
