@@ -34,6 +34,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private String op;
     private String str;
     private ArrayList<Observer> observers = new ArrayList<>();
+    private static MUI instance;
 
     public void setMg(MUI mg) {
         this.mg = mg;
@@ -70,6 +71,8 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
             name.setText(e.getName());
             mobile.setText(e.getMobileNo());
             email.setText(e.getEmail());
+            e.executeStrategy();
+            /*
             // Switch cases according to the category of the acquaintances
             switch (x) {
                 case 0:
@@ -98,6 +101,8 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 default:
                     break;
             }
+            */
+            
         }
         jButton10.setVisible(true);
         jButton11.setVisible(true);
@@ -179,6 +184,13 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
 
         //Adding Observer to the ObserverList
         addObserver(new ButtonListener(this));
+    }
+    
+    public static synchronized MUI getInstance(){
+        if(instance == null){
+            instance = new MUI();
+        }
+        return instance;
     }
 
     public final void setUpTableData() {
@@ -805,7 +817,8 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MUI().setVisible(true);
+                //new MUI().setVisible(true);
+                getInstance().setVisible(true);
             }
         });
     }
@@ -1196,5 +1209,23 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 jPanel3.setVisible(false);
                 break;
         }
+    }
+    
+    public void setOne(String s){
+        System.out.println("One =>"+one.getUIClassID());
+        System.out.println("One b4 =>"+one.getText());
+        one.setText(s);
+        one.setVisible(true);
+        System.out.println("One after=>"+one.getText());
+    }
+    
+    public void setTwo(String s){
+        two.setText(s);
+        two.setVisible(true);
+    }
+    
+    public void setThree(String s){
+        three.setText(s);
+        three.setVisible(true);
     }
 }

@@ -10,6 +10,7 @@ public class CasualAcquaintances extends Acquaintances implements Serializable{
     public static int numberCA = 0;
     
     CasualAcquaintances(){
+        setStrategy(new CasualAcquaintancesStrategy());
         numberCA++;
     }
 

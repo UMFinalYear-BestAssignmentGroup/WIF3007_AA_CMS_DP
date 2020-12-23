@@ -12,6 +12,7 @@ public abstract class Acquaintances implements Serializable {
     private String Info2;
     private String Info3;
     public static int number = 0;
+    private Strategy strategy;
 
     Acquaintances() {
         number++;
@@ -131,4 +132,13 @@ public abstract class Acquaintances implements Serializable {
     // Abstract method that return the number of extra informations required by each category
     // Used in setDetails() template method to determine the number of extra information.
     public abstract int checkInformation();
+    
+    public void setStrategy(Strategy s){
+        this.strategy = s;
+    }
+    
+    public void executeStrategy(){
+        System.out.println("Strategy: "+this.getClass());
+        strategy.setText(this);
+    }
 }
