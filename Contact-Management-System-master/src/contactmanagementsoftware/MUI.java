@@ -72,7 +72,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
             mobile.setText(e.getMobileNo());
             email.setText(e.getEmail());
             //Execute Strategy
-            e.executeStrategy();
+            e.executeStrategy(e);
         }
         jButton10.setVisible(true);
         jButton11.setVisible(true);

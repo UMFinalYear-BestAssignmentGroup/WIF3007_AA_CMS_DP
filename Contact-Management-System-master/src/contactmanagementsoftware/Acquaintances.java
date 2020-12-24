@@ -139,7 +139,7 @@ public abstract class Acquaintances implements Serializable {
     }
     
     //Execute the current Strategy
-    public void executeStrategy(){
-        strategy.setText(this);
+    public void executeStrategy(Acquaintances a){
+        strategy.setText(a);
     }
 }
