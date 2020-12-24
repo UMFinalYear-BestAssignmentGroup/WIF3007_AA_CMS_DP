@@ -10,7 +10,7 @@ public class PersonalFriends extends Acquaintances implements Serializable{
     public static int numberPerF = 0;
     
     PersonalFriends(){
-        setStrategy(new PersonalFriendsStrategy());
+        strategy = new PersonalFriendsStrategy();
         numberPerF++;
     }
 

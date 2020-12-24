@@ -12,7 +12,7 @@ public abstract class Acquaintances implements Serializable {
     private String Info2;
     private String Info3;
     public static int number = 0;
-    private Strategy strategy;
+    protected Strategy strategy;
 
     Acquaintances() {
         number++;
@@ -133,12 +133,13 @@ public abstract class Acquaintances implements Serializable {
     // Used in setDetails() template method to determine the number of extra information.
     public abstract int checkInformation();
     
+    //Set method to switch the Strategy 
     public void setStrategy(Strategy s){
         this.strategy = s;
     }
     
+    //Execute the current Strategy
     public void executeStrategy(){
-        System.out.println("Strategy: "+this.getClass());
         strategy.setText(this);
     }
 }

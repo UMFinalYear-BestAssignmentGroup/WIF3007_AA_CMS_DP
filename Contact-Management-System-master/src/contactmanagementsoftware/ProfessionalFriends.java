@@ -9,7 +9,7 @@ public class ProfessionalFriends extends Acquaintances implements Serializable{
     public static int numberProF = 0;
     
     ProfessionalFriends(){
-        setStrategy(new ProfessionalFriendsStrategy());
+        strategy = new ProfessionalFriendsStrategy();
         numberProF++;
     }
 

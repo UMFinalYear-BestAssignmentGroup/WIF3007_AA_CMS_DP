@@ -8,7 +8,7 @@ public class Relatives extends Acquaintances implements Serializable{
     public static int numberRel = 0;
     
     Relatives(){
-        setStrategy(new RelativesStrategy());
+        strategy = new RelativesStrategy();
         numberRel++;
     }
 

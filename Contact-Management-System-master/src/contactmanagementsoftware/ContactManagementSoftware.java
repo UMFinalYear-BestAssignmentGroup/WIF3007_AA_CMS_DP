@@ -13,7 +13,7 @@ public class ContactManagementSoftware implements Serializable{
     private static ArrayList<Acquaintances> ca1 = new ArrayList<>();
     
     public static void main(String[] args) {
-        mg = new MUI();
+        mg = MUI.getInstance();
         a.add(perF1);
         a.add(rel1);
         a.add(proF1);

@@ -71,38 +71,8 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
             name.setText(e.getName());
             mobile.setText(e.getMobileNo());
             email.setText(e.getEmail());
+            //Execute Strategy
             e.executeStrategy();
-            /*
-            // Switch cases according to the category of the acquaintances
-            switch (x) {
-                case 0:
-                    // PersonalFriends extra information
-                    one.setText(e.getThirdInfo());  //Events
-                    two.setText(e.getFirstInfo());  //Acontext
-                    three.setText(e.getSecondInfo()); //ADate
-                    break;
-                case 1:
-                    // Relatives extra information
-                    one.setText(e.getFirstInfo());  //BDate
-                    two.setText(e.getSecondInfo());  //LDate
-                    break;
-                case 2:
-                    // ProfessionalFriends extra information
-                    one.setText(e.getFirstInfo());  //CommonInterests
-                    break;
-                case 3:
-                    // CasualAcquaintannces extra informatin
-                    one.setText(e.getFirstInfo());  // WhenWhere
-                    two.setVisible(true);
-                    three.setVisible(true);
-                    two.setText(e.getSecondInfo());  //Circumstances
-                    three.setText(e.getThirdInfo());  //OtherInfo
-                    break;
-                default:
-                    break;
-            }
-            */
-            
         }
         jButton10.setVisible(true);
         jButton11.setVisible(true);
@@ -1210,20 +1180,17 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
         }
     }
-    
+    //Access to the private JTextArea one
     public void setOne(String s){
-        System.out.println("One =>"+one.getUIClassID());
-        System.out.println("One b4 =>"+one.getText());
-        one.setText(s);
-        one.setVisible(true);
-        System.out.println("One after=>"+one.getText());
+        this.one.setText(s);
+        this.one.setVisible(true);
     }
-    
+    //Access to the private JTextArea two
     public void setTwo(String s){
         two.setText(s);
         two.setVisible(true);
     }
-    
+    //Access to the private JTextArea three
     public void setThree(String s){
         three.setText(s);
         three.setVisible(true);

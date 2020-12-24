@@ -14,8 +14,7 @@ public class ProfessionalFriendsStrategy implements Strategy{
     @Override
     public void setText(Acquaintances a) {
         MUI mui = MUI.getInstance();
-        System.out.println("First inof = "+a.getFirstInfo());
-        mui.setOne(a.getFirstInfo());
+        mui.setOne(a.getFirstInfo().toString());
     }
     
 }
