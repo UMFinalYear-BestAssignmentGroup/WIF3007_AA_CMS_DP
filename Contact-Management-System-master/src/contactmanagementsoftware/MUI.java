@@ -34,6 +34,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private String op;
     private String str;
     private ArrayList<Observer> observers = new ArrayList<>();
+    AcquaintancesFactory af= new AcquaintancesFactory();
 
     public void setMg(MUI mg) {
         this.mg = mg;
@@ -762,6 +763,28 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
             return true;
         }
     }
+    
+    private Acquaintances Factory(int type, String Name, String Mobile, String Email, String info1, String info2, String info3){
+        switch (type){
+            case 0: 
+                PersonalFriends perF = new PersonalFriends();
+                perF.setDetails(Name, Mobile, Email, info1, info2, info3);
+                return perF;
+            case 1:
+                Relatives rel = new Relatives();
+                rel.setDetails(Name, Mobile, Email, info1, info2, info3);
+                return rel;
+            case 2:
+                ProfessionalFriends proF = new ProfessionalFriends();
+                proF.setDetails(Name, Mobile, Email, info1, info2, info3);
+                return proF;
+            case 3:
+                CasualAcquaintances ca = new CasualAcquaintances();
+                ca.setDetails(Name, Mobile, Email, info1, info2, info3);
+                return ca;
+        }
+        return null;
+    }
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
@@ -1073,6 +1096,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 String One,
                  Two,
                  Three;
+                Acquaintances ac;
                 switch (x) {
                     case 0: //perF
                         One = one.getText();
@@ -1093,16 +1117,15 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                             JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
                             return;
                         }
-                        PersonalFriends perF;
                         if (this.flag) {
-                            perF = new PersonalFriends();
+                            ac = af.Factory(x);
                         } else {
-                            perF = (PersonalFriends) a.get(x).get(num);
+                            ac = (PersonalFriends) a.get(x).get(num);
                         }
                         // Use template method in the Acquaintances.java to set the details of PersonalFriends
-                        perF.setDetails(Name, Mobile, Email, Two, Three, One);
+                        ac.setDetails(Name, Mobile, Email, Two, Three, One);
                         if (this.flag) {
-                            a.get(x).add(perF);
+                            a.get(x).add(ac);
                         }
                         //this.a.get(x).add(perF);
                         break;
@@ -1123,17 +1146,16 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                         if (!validDate(Two)) {
                             return;
                         }
-                        Relatives rel;
                         if (this.flag) {
-                            rel = new Relatives();
+                            ac = af.Factory(x);
                         } else {
-                            rel = (Relatives) a.get(x).get(num);
+                            ac = (Relatives) a.get(x).get(num);
                         }
                         // Use template method in the Acquaintances.java to set the details of Relatives
                         // null for irrelevant extra information
-                        rel.setDetails(Name, Mobile, Email, One, Two, null);
+                        ac.setDetails(Name, Mobile, Email, One, Two, null);
                         if (this.flag) {
-                            a.get(x).add(rel);
+                            a.get(x).add(ac);
                         }
                         break;
                     case 2: //proF
@@ -1142,17 +1164,17 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                             JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
                             return;
                         }
-                        ProfessionalFriends proF;
+                        
                         if (this.flag) {
-                            proF = new ProfessionalFriends();
+                            ac = af.Factory(x);
                         } else {
-                            proF = (ProfessionalFriends) a.get(x).get(num);
+                            ac = (ProfessionalFriends) a.get(x).get(num);
                         }
                         // Use template method in the Acquaintances.java to set the details of ProfessionalFriends
                         // null for irrelevant extra information
-                        proF.setDetails(Name, Mobile, Email, One, null, null);
+                        ac.setDetails(Name, Mobile, Email, One, null, null);
                         if (this.flag) {
-                            a.get(x).add(proF);
+                            a.get(x).add(ac);
                         }
                         break;
                     case 3: //ca
@@ -1171,16 +1193,15 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                             JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
                             return;
                         }
-                        CasualAcquaintances ca;
                         if (this.flag) {
-                            ca = new CasualAcquaintances();
+                            ac = af.Factory(x);
                         } else {
-                            ca = (CasualAcquaintances) a.get(x).get(num);
+                            ac = (CasualAcquaintances) a.get(x).get(num);
                         }
                         // Use template method in the Acquaintances.java to set the details of CasualAcquaintances
-                        ca.setDetails(Name, Mobile, Email, One, Two, Three);
+                        ac.setDetails(Name, Mobile, Email, One, Two, Three);
                         if (this.flag) {
-                            a.get(x).add(ca);
+                            a.get(x).add(ac);
                         }
                         break;
                     default:

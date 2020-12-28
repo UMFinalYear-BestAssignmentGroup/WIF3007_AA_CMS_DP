@@ -127,6 +127,8 @@ public abstract class Acquaintances implements Serializable {
     public String getThirdInfo() {
         return Info3;
     }
+    
+    
 
     // Abstract method that return the number of extra informations required by each category
     // Used in setDetails() template method to determine the number of extra information.
