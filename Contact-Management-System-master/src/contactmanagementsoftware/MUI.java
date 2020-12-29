@@ -146,7 +146,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
         }
     }
 
-    public MUI() {
+    private MUI() {
         initComponents();
         String[] columnNames = {"S.No", "Name", "Mobile", " Email"};
         DefaultTableModel model = new DefaultTableModel(null, columnNames);
@@ -1039,20 +1039,24 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
             case "jButton10":
 //                jButton10ActionPerformed
                 dflag = true;
+                String errMsg = ""; //String to store all error messages
                 String Name = name.getText();
                 if (Name.isEmpty()) {
-                    JOptionPane.showMessageDialog(mg, "Enter a name");
-                    return;
+                    errMsg += "Enter a name\n";
+                    //JOptionPane.showMessageDialog(mg, "Enter a name");
+                    //return;
                 }
                 String Mobile = mobile.getText();
                 if (!MobileNoChecker(Mobile)) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid mobile number (6-15 digits)");
-                    return;
+                    errMsg += "Enter a valid mobile number (6-15 digits)\n";
+                    //JOptionPane.showMessageDialog(mg, "Enter a valid mobile number (6-15 digits)");
+                    //return;
                 }
                 String Email = email.getText();
                 if (!Email.contains("@")) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid email");
-                    return;
+                    errMsg += "Enter a valid email\n";
+                    //JOptionPane.showMessageDialog(mg, "Enter a valid email");
+                    //return;
                 }
                 String One,
                  Two,
@@ -1060,28 +1064,65 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 Acquaintances ac;
                 
                 One = one.getText();
-                if (One.isEmpty() || One.length() > 300) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
                 Two = two.getText();
-                if ((Two.isEmpty() || Two.length() > 300) && x != 2) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
-                }
                 Three = three.getText();
-                if ((Three.isEmpty() || Three.length() > 300) && (x == 0 || x == 3)) {
-                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                    return;
+
+                
+                
+                //Append the error messages
+                if(x == 3){
+                    if(One.isEmpty() || One.length() > 300){
+                        errMsg += "Enter the valid value ( 1 to 300 chars) for First Meeting Time & Location\n";
+                    }
+                    if(Two.isEmpty() || Two.length() > 300){
+                        errMsg += "Enter a valid value ( 1 to 300 chars) for First Meeting Circumstances\n";
+                    }
+                    if(Three.isEmpty() || Three.length() > 300){
+                        errMsg += "Enter a valid value ( 1 to 300 chars) for Other Useful Information\n";
+                    }
                 }
-                //Validate date
+                if(x == 2){
+                    if(One.isEmpty() || One.length() > 300){
+                        errMsg += "Enter a valid value ( 1 to 300 chars) for Common Interests\n";
+                    }
+                }
                 if (x == 1) {
-                    if(!validDate(One) || !validDate(Two))
+                    //if(!validDate(One) || !validDate(Two))
+                    //    return;
+                    if(One.isEmpty() || One.length() > 300){
+                        errMsg += "Enter a valid date for Relative's Birthday\n";
+                    }
+                    else if(!validDate(One)){
                         return;
+                    }
+                    if(Two.isEmpty() || Two.length() > 300){
+                        errMsg += "Enter a valid date for Last Date Met\n";
+                    }
+                    else if(!validDate(Two)){
+                        return;
+                    }
                 }
                 if (x == 0) {
-                    if(!validDate(Three) )
+                    //if(!validDate(Three) )
+                        //return;
+                    if(One.isEmpty() || One.length() > 300){
+                        errMsg += "Enter a valid value ( 1 to 300 chars) for Specific Events\n";
+                    }
+                    if(Two.isEmpty() || Two.length() > 300){
+                        errMsg += "Enter a valid value  ( 1 to 300 chars) for First Acquaintance Context\n";
+                    }
+                    if(Three.isEmpty() || Three.length() > 300){
+                        errMsg += "Enter a valid date for First Acquaintance Date\n";
+                    }
+                    else if(!validDate(Three)){
                         return;
+                    }
+                }
+                
+                //display all error messages if they exists
+                if(!errMsg.isEmpty()){
+                    JOptionPane.showMessageDialog(mg, errMsg);
+                    return;
                 }
 //                if (!validDate(Two) && x == 1) {
 //                    return;

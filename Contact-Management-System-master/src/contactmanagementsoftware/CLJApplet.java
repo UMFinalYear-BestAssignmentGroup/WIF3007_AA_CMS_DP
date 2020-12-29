@@ -23,7 +23,7 @@ public class CLJApplet extends JApplet {
 
     @Override
     public void init() {
-        MUI mg = new MUI();
+        MUI mg = MUI.getInstance();
         a.add(perF1);
         a.add(rel1);
         a.add(proF1);
