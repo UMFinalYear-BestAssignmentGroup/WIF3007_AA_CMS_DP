@@ -1043,20 +1043,14 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 String Name = name.getText();
                 if (Name.isEmpty()) {
                     errMsg += "Enter a name\n";
-                    //JOptionPane.showMessageDialog(mg, "Enter a name");
-                    //return;
                 }
                 String Mobile = mobile.getText();
                 if (!MobileNoChecker(Mobile)) {
                     errMsg += "Enter a valid mobile number (6-15 digits)\n";
-                    //JOptionPane.showMessageDialog(mg, "Enter a valid mobile number (6-15 digits)");
-                    //return;
                 }
                 String Email = email.getText();
                 if (!Email.contains("@")) {
                     errMsg += "Enter a valid email\n";
-                    //JOptionPane.showMessageDialog(mg, "Enter a valid email");
-                    //return;
                 }
                 String One,
                  Two,
@@ -1067,12 +1061,10 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 Two = two.getText();
                 Three = three.getText();
 
-                
-                
                 //Append the error messages
                 if(x == 3){
                     if(One.isEmpty() || One.length() > 300){
-                        errMsg += "Enter the valid value ( 1 to 300 chars) for First Meeting Time & Location\n";
+                        errMsg += "Enter a valid value ( 1 to 300 chars) for First Meeting Time & Location\n";
                     }
                     if(Two.isEmpty() || Two.length() > 300){
                         errMsg += "Enter a valid value ( 1 to 300 chars) for First Meeting Circumstances\n";
