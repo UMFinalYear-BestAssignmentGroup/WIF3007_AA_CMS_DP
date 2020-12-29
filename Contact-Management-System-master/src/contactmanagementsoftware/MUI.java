@@ -1097,116 +1097,154 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                  Two,
                  Three;
                 Acquaintances ac;
-                switch (x) {
-                    case 0: //perF
-                        One = one.getText();
-                        if (One.isEmpty() || One.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        Two = two.getText();
-                        if (Two.isEmpty() || Two.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        Three = three.getText();
-                        if (!validDate(Three)) {
-                            return;
-                        }
-                        if (Three.isEmpty() || Three.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        if (this.flag) {
-                            ac = af.Factory(x);
-                        } else {
-                            ac = (PersonalFriends) a.get(x).get(num);
-                        }
-                        // Use template method in the Acquaintances.java to set the details of PersonalFriends
-                        ac.setDetails(Name, Mobile, Email, Two, Three, One);
-                        if (this.flag) {
-                            a.get(x).add(ac);
-                        }
-                        //this.a.get(x).add(perF);
-                        break;
-                    case 1: //rel
-                        One = one.getText();
-                        if (One.isEmpty() || One.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        if (!validDate(One)) {
-                            return;
-                        }
-                        Two = two.getText();
-                        if (Two.isEmpty() || Two.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        if (!validDate(Two)) {
-                            return;
-                        }
-                        if (this.flag) {
-                            ac = af.Factory(x);
-                        } else {
-                            ac = (Relatives) a.get(x).get(num);
-                        }
-                        // Use template method in the Acquaintances.java to set the details of Relatives
-                        // null for irrelevant extra information
-                        ac.setDetails(Name, Mobile, Email, One, Two, null);
-                        if (this.flag) {
-                            a.get(x).add(ac);
-                        }
-                        break;
-                    case 2: //proF
-                        One = one.getText();
-                        if (One.isEmpty() || One.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        
-                        if (this.flag) {
-                            ac = af.Factory(x);
-                        } else {
-                            ac = (ProfessionalFriends) a.get(x).get(num);
-                        }
-                        // Use template method in the Acquaintances.java to set the details of ProfessionalFriends
-                        // null for irrelevant extra information
-                        ac.setDetails(Name, Mobile, Email, One, null, null);
-                        if (this.flag) {
-                            a.get(x).add(ac);
-                        }
-                        break;
-                    case 3: //ca
-                        One = one.getText();
-                        if (One.isEmpty() || One.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        Two = two.getText();
-                        if (Two.isEmpty() || Two.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        Three = three.getText();
-                        if (Three.isEmpty() || Three.length() > 300) {
-                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-                            return;
-                        }
-                        if (this.flag) {
-                            ac = af.Factory(x);
-                        } else {
-                            ac = (CasualAcquaintances) a.get(x).get(num);
-                        }
-                        // Use template method in the Acquaintances.java to set the details of CasualAcquaintances
-                        ac.setDetails(Name, Mobile, Email, One, Two, Three);
-                        if (this.flag) {
-                            a.get(x).add(ac);
-                        }
-                        break;
-                    default:
-                        break;
+                
+                One = one.getText();
+                if (One.isEmpty() || One.length() > 300) {
+                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                    return;
                 }
+                Two = two.getText();
+                if ((Two.isEmpty() || Two.length() > 300) && x != 2) {
+                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                    return;
+                }
+                Three = three.getText();
+                if ((Three.isEmpty() || Three.length() > 300) && (x == 0 || x == 3)) {
+                    JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+                    return;
+                }
+                //Validate date
+                if (x == 1) {
+                    if(!validDate(One) || !validDate(Two))
+                        return;
+                }
+                if (x == 0) {
+                    if(!validDate(Three) )
+                        return;
+                }
+//                if (!validDate(Two) && x == 1) {
+//                    return;
+//                }
+                
+                if (this.flag) {
+                    ac = af.Factory2(x, Name, Mobile, Email, One, Two, Three);
+                } else {
+                    ac = af.existingAcquaintances(x, a, num);
+                }
+                if (this.flag) {
+                    a.get(x).add(ac);
+                }
+                
+//                switch (x) {
+//                    case 0: //perF
+//                        One = one.getText();
+//                        if (One.isEmpty() || One.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        Two = two.getText();
+//                        if (Two.isEmpty() || Two.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        Three = three.getText();
+//                        if (!validDate(Three)) {
+//                            return;
+//                        }
+//                        if (Three.isEmpty() || Three.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        if (this.flag) {
+//                            ac = af.Factory(x);
+//                        } else {
+//                            ac = (PersonalFriends) a.get(x).get(num);
+//                        }
+//                        // Use template method in the Acquaintances.java to set the details of PersonalFriends
+//                        ac.setDetails(Name, Mobile, Email, Two, Three, One);
+//                        if (this.flag) {
+//                            a.get(x).add(ac);
+//                        }
+//                        //this.a.get(x).add(perF);
+//                        break;
+//                    case 1: //rel
+//                        One = one.getText();
+//                        if (One.isEmpty() || One.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        if (!validDate(One)) {
+//                            return;
+//                        }
+//                        Two = two.getText();
+//                        if (Two.isEmpty() || Two.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        if (!validDate(Two)) {
+//                            return;
+//                        }
+//                        if (this.flag) {
+//                            ac = af.Factory(x);
+//                        } else {
+//                            ac = (Relatives) a.get(x).get(num);
+//                        }
+//                        // Use template method in the Acquaintances.java to set the details of Relatives
+//                        // null for irrelevant extra information
+//                        ac.setDetails(Name, Mobile, Email, One, Two, null);
+//                        if (this.flag) {
+//                            a.get(x).add(ac);
+//                        }
+//                        break;
+//                    case 2: //proF
+//                        One = one.getText();
+//                        if (One.isEmpty() || One.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        
+//                        if (this.flag) {
+//                            ac = af.Factory(x);
+//                        } else {
+//                            ac = (ProfessionalFriends) a.get(x).get(num);
+//                        }
+//                        // Use template method in the Acquaintances.java to set the details of ProfessionalFriends
+//                        // null for irrelevant extra information
+//                        ac.setDetails(Name, Mobile, Email, One, null, null);
+//                        if (this.flag) {
+//                            a.get(x).add(ac);
+//                        }
+//                        break;
+//                    case 3: //ca
+//                        One = one.getText();
+//                        if (One.isEmpty() || One.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        Two = two.getText();
+//                        if (Two.isEmpty() || Two.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        Three = three.getText();
+//                        if (Three.isEmpty() || Three.length() > 300) {
+//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
+//                            return;
+//                        }
+//                        if (this.flag) {
+//                            ac = af.Factory(x);
+//                        } else {
+//                            ac = (CasualAcquaintances) a.get(x).get(num);
+//                        }
+//                        // Use template method in the Acquaintances.java to set the details of CasualAcquaintances
+//                        ac.setDetails(Name, Mobile, Email, One, Two, Three);
+//                        if (this.flag) {
+//                            a.get(x).add(ac);
+//                        }
+//                        break;
+//                    default:
+//                        break;
+//                }
                 jPanel1.setVisible(true);
                 jPanel3.setVisible(false);
                 mg.setUpTableData();
