@@ -52,22 +52,27 @@ public class AcquaintancesFactory {
         return null;
     }
     
-    public Acquaintances existingAcquaintances(int type, ArrayList<ArrayList<Acquaintances>> a, int num){
+    public Acquaintances existingAcquaintances(int type, ArrayList<ArrayList<Acquaintances>> a, int num, String Name, String Mobile, String Email, String One, String Two, String Three){
         Acquaintances ac;
         switch (type){
             case 0: 
                 ac = (PersonalFriends) a.get(type).get(num);
+                ac.setDetails(Name, Mobile, Email, Two, Three, One);
                 return ac;
             case 1:
                 ac = (Relatives) a.get(type).get(num);
+                ac.setDetails(Name, Mobile, Email, One, Two, null);
                 return ac;
             case 2:
                 ac = (ProfessionalFriends) a.get(type).get(num);
+                ac.setDetails(Name, Mobile, Email, One, null, null);
                 return ac;
             case 3:
                 ac = (CasualAcquaintances) a.get(type).get(num);
+                ac.setDetails(Name, Mobile, Email, One, Two, Three);
                 return ac;
         }
         return null;
     }
+
 }
