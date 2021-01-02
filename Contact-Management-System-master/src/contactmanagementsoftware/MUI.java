@@ -35,7 +35,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private String str;
     private ArrayList<Observer> observers = new ArrayList<>();
     private static MUI instance;
-    AcquaintancesFactory af= new AcquaintancesFactory();
+    AcquaintancesFactory af = new AcquaintancesFactory();
 
     public void setMg(MUI mg) {
         this.mg = mg;
@@ -156,9 +156,9 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
         //Adding Observer to the ObserverList
         addObserver(new ButtonListener(this));
     }
-    
-    public static synchronized MUI getInstance(){
-        if(instance == null){
+
+    public static synchronized MUI getInstance() {
+        if (instance == null) {
             instance = new MUI();
         }
         return instance;
@@ -1056,79 +1056,80 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                  Two,
                  Three;
                 Acquaintances ac;
-                
+
                 One = one.getText();
                 Two = two.getText();
                 Three = three.getText();
+                System.out.println(One);
+                System.out.println(Two);
+                System.out.println(Three);
 
                 //Append the error messages
-                if(x == 3){
-                    if(One.isEmpty() || One.length() > 300){
+                if (x == 3) {
+                    if (One.isEmpty() || One.length() > 300) {
                         errMsg += "Enter a valid value ( 1 to 300 chars) for First Meeting Time & Location\n";
                     }
-                    if(Two.isEmpty() || Two.length() > 300){
+                    if (Two.isEmpty() || Two.length() > 300) {
                         errMsg += "Enter a valid value ( 1 to 300 chars) for First Meeting Circumstances\n";
                     }
-                    if(Three.isEmpty() || Three.length() > 300){
+                    if (Three.isEmpty() || Three.length() > 300) {
                         errMsg += "Enter a valid value ( 1 to 300 chars) for Other Useful Information\n";
                     }
                 }
-                if(x == 2){
-                    if(One.isEmpty() || One.length() > 300){
+                if (x == 2) {
+                    if (One.isEmpty() || One.length() > 300) {
                         errMsg += "Enter a valid value ( 1 to 300 chars) for Common Interests\n";
                     }
                 }
                 if (x == 1) {
                     //if(!validDate(One) || !validDate(Two))
                     //    return;
-                    if(One.isEmpty() || One.length() > 300){
+                    if (One.isEmpty() || One.length() > 300) {
                         errMsg += "Enter a valid date for Relative's Birthday\n";
-                    }
-                    else if(!validDate(One)){
+                    } else if (!validDate(One)) {
                         return;
                     }
-                    if(Two.isEmpty() || Two.length() > 300){
+                    if (Two.isEmpty() || Two.length() > 300) {
                         errMsg += "Enter a valid date for Last Date Met\n";
-                    }
-                    else if(!validDate(Two)){
+                    } else if (!validDate(Two)) {
                         return;
                     }
                 }
                 if (x == 0) {
                     //if(!validDate(Three) )
-                        //return;
-                    if(One.isEmpty() || One.length() > 300){
+                    //return;
+                    if (One.isEmpty() || One.length() > 300) {
                         errMsg += "Enter a valid value ( 1 to 300 chars) for Specific Events\n";
                     }
-                    if(Two.isEmpty() || Two.length() > 300){
+                    if (Two.isEmpty() || Two.length() > 300) {
                         errMsg += "Enter a valid value  ( 1 to 300 chars) for First Acquaintance Context\n";
                     }
-                    if(Three.isEmpty() || Three.length() > 300){
+                    if (Three.isEmpty() || Three.length() > 300) {
                         errMsg += "Enter a valid date for First Acquaintance Date\n";
-                    }
-                    else if(!validDate(Three)){
+                    } else if (!validDate(Three)) {
                         return;
                     }
                 }
-                
+
                 //display all error messages if they exists
-                if(!errMsg.isEmpty()){
+                if (!errMsg.isEmpty()) {
                     JOptionPane.showMessageDialog(mg, errMsg);
                     return;
                 }
 //                if (!validDate(Two) && x == 1) {
 //                    return;
 //                }
-                
+
                 if (this.flag) {
                     ac = af.Factory2(x, Name, Mobile, Email, One, Two, Three);
                 } else {
                     ac = af.existingAcquaintances(x, a, num);
+                    ac.setDetails(Name, Mobile, Email, Two, Three, One);
                 }
                 if (this.flag) {
                     a.get(x).add(ac);
                 }
-                
+
 //                switch (x) {
 //                    case 0: //perF
 //                        One = one.getText();
@@ -1253,18 +1254,21 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 break;
         }
     }
+
     //Access to the private JTextArea one
-    public void setOne(String s){
+    public void setOne(String s) {
         this.one.setText(s);
         this.one.setVisible(true);
     }
+
     //Access to the private JTextArea two
-    public void setTwo(String s){
+    public void setTwo(String s) {
         two.setText(s);
         two.setVisible(true);
     }
+
     //Access to the private JTextArea three
-    public void setThree(String s){
+    public void setThree(String s) {
         three.setText(s);
         three.setVisible(true);
     }
