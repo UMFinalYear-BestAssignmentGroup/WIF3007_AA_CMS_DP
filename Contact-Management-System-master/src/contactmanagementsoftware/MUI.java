@@ -1127,7 +1127,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
 //                }
                 
                 if (this.flag) {
-                    ac = af.Factory2(x, Name, Mobile, Email, One, Two, Three);
+                    ac = af.Factory(x, Name, Mobile, Email, One, Two, Three);
                 } else {
                     ac = af.existingAcquaintances(x, a, num);
                 }

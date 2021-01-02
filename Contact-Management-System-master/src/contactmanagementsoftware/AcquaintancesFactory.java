@@ -16,21 +16,21 @@ public class AcquaintancesFactory {
         
     }
     
-    public Acquaintances Factory(int type) {
-        switch (type){
-            case 0: 
-                return new PersonalFriends();
-            case 1:
-                return new Relatives();
-            case 2:
-                return new ProfessionalFriends();
-            case 3:
-                return new CasualAcquaintances();
-        }
-        return null;
-    }
+//    public Acquaintances Factory(int type) {
+//        switch (type){
+//            case 0: 
+//                return new PersonalFriends();
+//            case 1:
+//                return new Relatives();
+//            case 2:
+//                return new ProfessionalFriends();
+//            case 3:
+//                return new CasualAcquaintances();
+//        }
+//        return null;
+//    }
     
-    public Acquaintances Factory2(int type, String Name, String Mobile, String Email, String One, String Two, String Three) {
+    public Acquaintances Factory(int type, String Name, String Mobile, String Email, String One, String Two, String Three) {
         switch (type){
             case 0: 
                 PersonalFriends perF = new PersonalFriends();
@@ -65,7 +65,7 @@ public class AcquaintancesFactory {
                 ac = (ProfessionalFriends) a.get(type).get(num);
                 return ac;
             case 3:
-                ac = (CasualAcquaintances) a.get(type).get(num);
+                ac =  a.get(type).get(num);
                 return ac;
         }
         return null;
