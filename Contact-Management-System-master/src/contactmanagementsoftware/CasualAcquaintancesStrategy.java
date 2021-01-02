@@ -5,11 +5,13 @@
  */
 package contactmanagementsoftware;
 
+import java.io.Serializable;
+
 /**
  *
  * @author User
  */
-public class CasualAcquaintancesStrategy implements Strategy{
+public class CasualAcquaintancesStrategy implements Strategy, Serializable{
 
     @Override
     public void setText(Acquaintances a) {
