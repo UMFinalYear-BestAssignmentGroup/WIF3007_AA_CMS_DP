@@ -14,9 +14,9 @@ public class PersonalFriendsStrategy implements Strategy{
     @Override
     public void setText(Acquaintances a) {
         MUI mui = MUI.getInstance();
-        mui.setOne(a.getFirstInfo());
-        mui.setTwo(a.getSecondInfo());
-        mui.setThree(a.getThirdInfo());
+        mui.setOne(a.getThirdInfo());
+        mui.setTwo(a.getFirstInfo());
+        mui.setThree(a.getSecondInfo());
     }
     
 }
