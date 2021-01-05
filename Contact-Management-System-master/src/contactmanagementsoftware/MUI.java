@@ -35,6 +35,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private String str;
     private ArrayList<Observer> observers = new ArrayList<>();
     private static MUI instance;
+    private String buttonState = "";
     AcquaintancesFactory af = new AcquaintancesFactory();
 
     public void setMg(MUI mg) {
@@ -582,28 +583,28 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
 //        Add button
-        notifyAllObservers("Add");
+        setButtonState("Add");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
 //        Delete button
-        notifyAllObservers("Delete");
+        setButtonState("Delete");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
 //        View full detail button
         System.out.println(button.getText());
-        notifyAllObservers("Search");
+        setButtonState("Search");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
 //        Exit button
-        notifyAllObservers("Exit");
+        setButtonState("Exit");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -614,14 +615,14 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
 //        Edit Button
-        notifyAllObservers("Edit");
+        setButtonState("Edit");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
 //        View full detail button
         System.out.println(button.getText());
-        notifyAllObservers("View");
+        setButtonState("View");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     public void runn() {
@@ -699,20 +700,20 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
 //        Read from file button
         System.out.println(button.getText());
-        notifyAllObservers("Read");
+        setButtonState("Read");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
 //        Save as file button
         System.out.println(button.getText());
-        notifyAllObservers("Save");
+        setButtonState("Save");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        notifyAllObservers("jButton9");
+        setButtonState("jButton9");
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
@@ -749,13 +750,13 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        notifyAllObservers("jButton10");
+        setButtonState("jButton10");
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         javax.swing.JButton button = (javax.swing.JButton) evt.getSource();
         System.out.println(button.getText());
-        notifyAllObservers("jButton11");
+        setButtonState("jButton11");
     }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
@@ -846,9 +847,9 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     }
 
     @Override
-    public void notifyAllObservers(String action) {
+    public void notifyAllObservers() {
         for (Observer observer : observers) {
-            observer.update(action);
+            observer.update();
         }
     }
 
@@ -1082,8 +1083,6 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                     }
                 }
                 if (x == 1) {
-                    //if(!validDate(One) || !validDate(Two))
-                    //    return;
                     if (One.isEmpty() || One.length() > 300) {
                         errMsg += "Enter a valid date for Relative's Birthday\n";
                     } else if (!validDate(One)) {
@@ -1096,8 +1095,6 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                     }
                 }
                 if (x == 0) {
-                    //if(!validDate(Three) )
-                    //return;
                     if (One.isEmpty() || One.length() > 300) {
                         errMsg += "Enter a valid value ( 1 to 300 chars) for Specific Events\n";
                     }
@@ -1116,9 +1113,6 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                     JOptionPane.showMessageDialog(mg, errMsg);
                     return;
                 }
-//                if (!validDate(Two) && x == 1) {
-//                    return;
-//                }
 
                 if (this.flag) {
                     ac = af.Factory2(x, Name, Mobile, Email, One, Two, Three);
@@ -1128,120 +1122,6 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 if (this.flag) {
                     a.get(x).add(ac);
                 }
-
-//                switch (x) {
-//                    case 0: //perF
-//                        One = one.getText();
-//                        if (One.isEmpty() || One.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        Two = two.getText();
-//                        if (Two.isEmpty() || Two.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        Three = three.getText();
-//                        if (!validDate(Three)) {
-//                            return;
-//                        }
-//                        if (Three.isEmpty() || Three.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        PersonalFriends perF;
-//                        if (this.flag) {
-//                            perF = new PersonalFriends();
-//                        } else {
-//                            perF = (PersonalFriends) a.get(x).get(num);
-//                        }
-//                        // Use template method in the Acquaintances.java to set the details of PersonalFriends
-//                        perF.setDetails(Name, Mobile, Email, Two, Three, One);
-//                        if (this.flag) {
-//                            a.get(x).add(perF);
-//                        }
-//                        //this.a.get(x).add(perF);
-//                        break;
-//                    case 1: //rel
-//                        One = one.getText();
-//                        if (One.isEmpty() || One.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        if (!validDate(One)) {
-//                            return;
-//                        }
-//                        Two = two.getText();
-//                        if (Two.isEmpty() || Two.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        if (!validDate(Two)) {
-//                            return;
-//                        }
-//                        Relatives rel;
-//                        if (this.flag) {
-//                            rel = new Relatives();
-//                        } else {
-//                            rel = (Relatives) a.get(x).get(num);
-//                        }
-//                        // Use template method in the Acquaintances.java to set the details of Relatives
-//                        // null for irrelevant extra information
-//                        rel.setDetails(Name, Mobile, Email, One, Two, null);
-//                        if (this.flag) {
-//                            a.get(x).add(rel);
-//                        }
-//                        break;
-//                    case 2: //proF
-//                        One = one.getText();
-//                        if (One.isEmpty() || One.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        ProfessionalFriends proF;
-//                        if (this.flag) {
-//                            proF = new ProfessionalFriends();
-//                        } else {
-//                            proF = (ProfessionalFriends) a.get(x).get(num);
-//                        }
-//                        // Use template method in the Acquaintances.java to set the details of ProfessionalFriends
-//                        // null for irrelevant extra information
-//                        proF.setDetails(Name, Mobile, Email, One, null, null);
-//                        if (this.flag) {
-//                            a.get(x).add(proF);
-//                        }
-//                        break;
-//                    case 3: //ca
-//                        One = one.getText();
-//                        if (One.isEmpty() || One.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        Two = two.getText();
-//                        if (Two.isEmpty() || Two.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        Three = three.getText();
-//                        if (Three.isEmpty() || Three.length() > 300) {
-//                            JOptionPane.showMessageDialog(mg, "Enter a valid value ( 1 to 300 chars)");
-//                            return;
-//                        }
-//                        CasualAcquaintances ca;
-//                        if (this.flag) {
-//                            ca = new CasualAcquaintances();
-//                        } else {
-//                            ca = (CasualAcquaintances) a.get(x).get(num);
-//                        }
-//                        // Use template method in the Acquaintances.java to set the details of CasualAcquaintances
-//                        ca.setDetails(Name, Mobile, Email, One, Two, Three);
-//                        if (this.flag) {
-//                            a.get(x).add(ca);
-//                        }
-//                        break;
-//                    default:
-//                        break;
-//                }
                 jPanel1.setVisible(true);
                 jPanel3.setVisible(false);
                 mg.setUpTableData();
@@ -1252,6 +1132,7 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
                 jPanel3.setVisible(false);
                 break;
         }
+        setButtonState("");
     }
 
     //Access to the private JTextArea one
@@ -1270,5 +1151,20 @@ public class MUI extends javax.swing.JFrame implements ObserverSubject {
     public void setThree(String s) {
         three.setText(s);
         three.setVisible(true);
+    }
+
+    @Override
+    public void setButtonState(String action) {
+        this.buttonState = action;
+        if (!action.equals("")) {
+            System.out.println("Notifying all observers");
+            notifyAllObservers();
+        }
+
+    }
+
+    @Override
+    public String getButtonState() {
+        return this.buttonState;
     }
 }

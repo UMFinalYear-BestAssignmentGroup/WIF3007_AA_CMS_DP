@@ -10,5 +10,5 @@ package contactmanagementsoftware;
  * @author Melvin
  */
 public interface Observer {
-    public void update(String action);
+    public void update();
 }

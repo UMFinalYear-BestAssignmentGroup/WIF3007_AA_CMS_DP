@@ -17,7 +17,7 @@ public class ButtonListener implements Observer{
     }
 
     @Override
-    public void update(String action) {
-        mui.perform(action);
+    public void update() {
+        mui.perform(mui.getButtonState());
     }
 }

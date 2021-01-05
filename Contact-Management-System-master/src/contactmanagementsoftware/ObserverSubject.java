@@ -12,6 +12,8 @@ package contactmanagementsoftware;
 public interface ObserverSubject {
     public void addObserver(Observer observer);
     public void removeObserver(Observer observer);
-    public void notifyAllObservers(String action);
+    public void notifyAllObservers();
     public void perform(String action);
+    public void setButtonState(String action);
+    public String getButtonState();
 }
